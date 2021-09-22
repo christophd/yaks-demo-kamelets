@@ -1,0 +1,13 @@
+# IDEs
+.idea
+*.iml
+.metadata
+.project
+.classpath
+.settings
+
+.DS_Store
+
+# Temporary Build Files
+target/
+_output

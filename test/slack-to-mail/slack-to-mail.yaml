@@ -1,0 +1,30 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: slack-to-mail
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: slack-source
+    properties:
+      channel: "${slack.channel}"
+      token: "${slack.token}"
+  steps:
+  - ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: extract-field-action
+    properties:
+      field: text
+  sink:
+    ref:
+      apiVersion: camel.apache.org/v1alpha1
+      kind: Kamelet
+      name: mail-sink
+    properties:
+      host: "${host}"
+      from: "${from}"
+      to: "${to}"
+      subject: "${subject}"
